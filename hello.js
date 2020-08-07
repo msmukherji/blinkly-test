@@ -1,6 +1,34 @@
 const http = require('http');
+const express = require('express');
+const bodyParser = require('body-parser')
+
 const hostname = 'localhost';
 const port = 3000;
+
+const app = express();
+
+
+var MongoClient = require('mongodb').MongoClient;
+
+var url = 'mongodb://mishka-db.pg.gl/Users';
+
+
+MongoClient.connect(url, function(err, db) {
+    var cursor = db.collection('Users').find();
+    cursor.each(function(err, doc) {
+        console.log(doc);
+    });
+});
+
+app.use(express.static('dist'));
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
+
 
 const helpText = `
 <!DOCTYPE html>
