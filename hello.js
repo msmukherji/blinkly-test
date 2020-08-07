@@ -14,6 +14,7 @@ var url = 'mongodb://mishka-db.pg.gl/Users';
 
 
 MongoClient.connect(url, function(err, db) {
+  console.log(db);
     var cursor = db.collection('Users').find();
     cursor.each(function(err, doc) {
         console.log(doc);
